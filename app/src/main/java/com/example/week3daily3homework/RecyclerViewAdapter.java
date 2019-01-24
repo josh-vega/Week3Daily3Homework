@@ -36,6 +36,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Result result = userArrayList.get(position);
         if(result != null){
             String name = result.getName().getFirst() + " " + result.getName().getLast();
+            String username = result.getLogin().getUsername();
+            String password = result.getLogin().getPassword();
+            String dob = result.getDob().getDate();
+            String gender = result.getGender();
+            String street = result.getLocation().getStreet();
+            String city = result.getLocation().getCity();
+            String state = result.getLocation().getState();
+            String phone = result.getPhone();
+            String email = result.getEmail();
 
             viewHolder.setItemResult(result);
             viewHolder.tvName.setText(name);
@@ -66,10 +75,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
+                    Context c = view.getContext();
                     Bundle bundle = new Bundle();
-                    Context context = view.getContext();
-                    Intent intent = new Intent(context, DisplayActivity.class);
-                    context.startActivity(intent);
+                    Intent intent = new Intent(c, DisplayActivity.class);
+                    bundle.putParcelable("person", itemResult);
+                    intent.putExtras(bundle);
+                    c.startActivity(intent);
                 }
             });
         }

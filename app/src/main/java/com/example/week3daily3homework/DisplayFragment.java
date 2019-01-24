@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +39,13 @@ public class DisplayFragment extends Fragment {
     }
 
     public void setDisplay(String string) {
-        tvFragImage.setImageResource(Integer.getInteger(string));
+        if(tvFragImage != null) {
+            Glide.with(this.getContext()).load(string).into(tvFragImage);
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
     }
 }
